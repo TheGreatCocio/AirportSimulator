@@ -8,8 +8,24 @@ using System.Threading.Tasks;
 
 namespace AirportSimulator.system
 {
-    class DAL
+    public class DAL
     {
+        private static DAL instance;
+
+        public static DAL Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new DAL();
+                }
+                return instance;
+            }
+        } 
+
+        private DAL() { }
+
         Dictionary<int, string> Destinations = new Dictionary<int, string>();
 
         private void CreateOfferedDestinations()
@@ -24,6 +40,7 @@ namespace AirportSimulator.system
             Destinations.Add(7, "Paris");
             Destinations.Add(8, "Turkey");
         }
+
         public string GetDestination(int identifier)
         {
             CreateOfferedDestinations();

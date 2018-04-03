@@ -1,4 +1,5 @@
 ﻿using AirportSimulator.Model;
+using AirportSimulator.system;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,5 @@ namespace AirportSimulator.ViewModel
 {
     public class ViewModel : ViewModelBase
     {
-        
     }
 }

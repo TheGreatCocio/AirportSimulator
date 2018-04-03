@@ -1,0 +1,28 @@
+﻿<Page
+    x:Class="AirportSimulator.FlightPlan"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AirportSimulator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:AirportSimulator.ViewModel"
+    Height="600px" Width="300">
+
+   
+
+    <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView HorizontalAlignment="center" VerticalAlignment="Top" Height="100" Width="{Binding ActualWidth, ElementName=grid}"
+                  Background="Black" Foreground="White" ItemsSource="{Binding FlightPlans}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Destination: "/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Terminal: "/>
+
+        </ListView>
+
+    </Grid>
+</Page>

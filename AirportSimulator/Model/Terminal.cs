@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AirportSimulator.Model
 {
-    class Terminal
+    public class Terminal
     {
         private static int terminalNumberIncrementer = 1;
         private int terminalNumber, destination;
