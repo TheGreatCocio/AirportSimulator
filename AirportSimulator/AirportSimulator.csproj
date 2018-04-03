@@ -112,6 +112,7 @@
     <Compile Include="system\SortingMachine.cs" />
     <Compile Include="system\DAL.cs" />
     <Compile Include="ViewModel\FlightPlanViewModel.cs" />
+    <Compile Include="ViewModel\TerminalViewModel.cs" />
     <Compile Include="ViewModel\ViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
   </ItemGroup>

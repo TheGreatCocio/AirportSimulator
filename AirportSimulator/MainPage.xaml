@@ -3,24 +3,74 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AirportSimulator"
+    xmlns:Terminal="using:AirportSimulator.ViewModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
+    <Page.DataContext>
+        <Terminal:TerminalViewModel/>
+    </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="MainGrid">
 
         <Grid.ColumnDefinitions>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
+            <ColumnDefinition />
+
         </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-            <RowDefinition/>
-            <RowDefinition/>
+        <Grid.RowDefinitions >
+            <RowDefinition Height="0*"/>
+            <RowDefinition  Height="2*" />
+            <RowDefinition Height="2*"/>
+            <RowDefinition  Height="2*" />
         </Grid.RowDefinitions>
 
-        <Grid x:Name="FirstGrid" Grid.Column="0" Grid.Row="0" Background="#0078d7" />
-        <Grid x:Name="SecondGrid" Grid.Column="1" Grid.Row="0" Background="#107C10" />
-        <Grid x:Name="Third" Grid.Column="0" Grid.Row="1" Background="#000000" />
+        <Grid x:Name="FirstGrid" Grid.Row="1" Background="#0078d7">
+            <TextBlock Text="Status"/>
+            <Button Content="Open" Margin="16,105,0,197" />
+            <Button Content="Close" Margin="0,107,1338,195" HorizontalAlignment="Right" />
+            <TextBlock Text="Destination" Margin="14.18,244.209,1262.18,56.209" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.154"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Text="Luggage Count" Margin="384.18,248.209,892.18,52.709" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.154"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <Grid x:Name="SecondGrid" Grid.Row="2" Background="#0078d7">
+            <TextBlock Text="Status"/>
+            <Button Content="Open" />
+            <Button Content="Close" Margin="90,153,0,149" />
+            <TextBlock Text="Destination" Margin="14.18,244.209,1262.18,56.209" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.154"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Text="Luggage Count" Margin="384.18,248.209,892.18,52.709" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.154"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+        </Grid>
+        <Grid x:Name="ThirdtGrid" Grid.Row="3" Background="#0078d7">
+            <TextBlock Text="Status"/>
+            <Button Content="Open" />
+            <Button Content="Close" Margin="90,153,0,149" />
+            <TextBlock Text="Destination" Margin="14.18,244.209,1262.18,56.209" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.154"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock Text="Luggage Count" Margin="384.18,248.209,892.18,52.709" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
+                <TextBlock.RenderTransform>
+                    <CompositeTransform Rotation="-0.154"/>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+
+        </Grid>
+
 
     </Grid>
 </Page>
