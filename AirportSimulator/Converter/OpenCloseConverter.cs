@@ -13,11 +13,11 @@ namespace AirportSimulator.Converter
         {
             if (value.Equals(true))
             {
-                return "green";
+                return "Green";
             }
             else
             {
-                return "red";
+                return "Red";
             }
         }
 

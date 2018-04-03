@@ -8,45 +8,45 @@
     xmlns:OpenClose="using:AirportSimulator.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    x:Name="page">
     <Page.DataContext>
         <ViewModel:ViewModel/>
     </Page.DataContext>
+
+    <Page.Resources>
+        <OpenClose:OpenCloseConverter x:Key="OpenCloseConvert" />
+    </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="MainGrid">
         <Grid.DataContext>
             <Terminal:TerminalViewModel/>
         </Grid.DataContext>
-        <Grid.Resources>
-            <OpenClose:OpenCloseConverter x:Key="OpenCloseConvert" />
-        </Grid.Resources>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
 
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions >
-            <RowDefinition Height="0*"/>
-            <RowDefinition  Height="2*" />
-            <RowDefinition Height="2*"/>
-            <RowDefinition  Height="2*" />
-        </Grid.RowDefinitions>
-
-        <Grid x:Name="FirstGrid" Grid.Row="1" Background="{x:Bind Converter={StaticResource OpenCloseConvert}}">
-            <TextBlock Text="Status"/>
-            <Button Content="Open" Margin="16,105,0,197" />
-            <Button Content="Close" Margin="0,107,1338,195" HorizontalAlignment="Right" />
-            <TextBlock Text="Destination" Margin="14.18,244.209,1262.18,56.209" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform Rotation="-0.154"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Text="Luggage Count" Margin="384.18,248.209,892.18,52.709" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform Rotation="-0.154"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-        </Grid>
-        <Grid x:Name="SecondGrid" Grid.Row="2" Background="{x:Bind Converter={StaticResource OpenCloseConvert}}">
+        <ListView  ItemsSource="{Binding Terminals}" Width="{Binding ActualWidth, ElementName=page}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="FirstGrid" Background="{Binding IsOpen, Converter={StaticResource OpenCloseConvert}}">
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0"/>
+                        <TextBlock Grid.Row="0" Text="{Binding IsOpen}"  Margin="50,20,0,0" />
+                        <Button Grid.Row="1" Content="Open" Margin="0,30,0,0" />
+                        <Button Grid.Row="1" Content="Close" Margin="100,30,0,0" Click="Button_Click" />
+                        <TextBlock Grid.Row="2" Text="Destination: " Margin="0,40,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Padding="0,0,0,20"/>
+                        <TextBlock Grid.Row="2" Text="{Binding FlightPlan.Destination}" Margin="100,40,0,0" />
+                        <TextBlock Grid.Row="2" Name="LuggageCount" Text="Luggage Count: " Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
+                        <TextBlock Grid.Row="2" Text="{Binding LuggageToBeBoarded.Count}" Margin="110,0,0,0"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <!--<Grid x:Name="SecondGrid" Grid.Row="2" Background="{x:Bind Converter={StaticResource OpenCloseConvert}}">
             <TextBlock Text="Status"/>
             <Button Content="Open" />
             <Button Content="Close" Margin="90,153,0,149" />
@@ -76,7 +76,7 @@
                 </TextBlock.RenderTransform>
             </TextBlock>
 
-        </Grid>
+        </Grid>-->
 
 
     </Grid>

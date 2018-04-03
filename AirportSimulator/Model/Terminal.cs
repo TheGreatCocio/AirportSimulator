@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AirportSimulator.system;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,7 +29,10 @@ namespace AirportSimulator.Model
         {
             Destination = destination;
             TerminalNumber = terminalNumberIncrementer++;
-            Task task = Task.Factory.StartNew(TakeLuggageToPlane);
+            //Task task = Task.Factory.StartNew(TakeLuggageToPlane);
+            IsOpen = true;
+
+            FlightPlan = new FlightPlan(this.terminalNumber, DAL.Instance.GetDestination(destination - 1));
         }
 
         public async void TakeLuggageToPlane()
@@ -42,7 +46,7 @@ namespace AirportSimulator.Model
                     LuggageToBeBoarded.Clear();
                 }
             }
-        }
+        }        
 
         public void DequeueLuggage()
         {
