@@ -96,8 +96,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FlightPlan.xaml.cs">
-      <DependentUpon>FlightPlan.xaml</DependentUpon>
+    <Compile Include="FlightPlanPage.xaml.cs">
+      <DependentUpon>FlightPlanPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="system\LostAndFound.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -136,7 +136,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="FlightPlan.xaml">
+    <Page Include="FlightPlanPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

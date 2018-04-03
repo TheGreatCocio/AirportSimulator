@@ -41,6 +41,16 @@ namespace AirportSimulator.system
             Destinations.Add(8, "Turkey");
         }
 
+        public List<FlightPlan> CreateFlightPlans()
+        {
+            List<FlightPlan> flightPlanList = new List<FlightPlan>();
+            foreach (KeyValuePair<int, string> destination in Destinations)
+            {
+                flightPlanList.Add(new FlightPlan(destination.Key, destination.Value));
+            }
+            return flightPlanList;
+        }
+
         public string GetDestination(int identifier)
         {
             CreateOfferedDestinations();

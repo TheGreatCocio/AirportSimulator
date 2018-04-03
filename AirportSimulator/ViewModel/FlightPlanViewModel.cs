@@ -17,15 +17,15 @@ namespace AirportSimulator.ViewModel
 
         private void GetFlightPlans()
         {
-            foreach (Terminal terminal in DAL.Instance.CreateTerminals())
-            {
-                FlightPlans.Add(new FlightPlan(terminal.TerminalNumber));
-            }
+            
         }
 
         public FlightPlanViewModel()
         {
-            GetFlightPlans();
+            foreach (FlightPlan plan in DAL.Instance.CreateFlightPlans())
+            {
+                flightPlans.Add(plan);
+            }
         }
     }
 }
