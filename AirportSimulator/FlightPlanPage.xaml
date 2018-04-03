@@ -14,18 +14,20 @@
     </Page.DataContext>
 
     <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <ListView HorizontalAlignment="center" VerticalAlignment="Top" Height="100" Width="{Binding ActualWidth, ElementName=grid}"
-                  Background="Black" Foreground="White" ItemsSource="{Binding FlightPlans}" SelectionChanged="ListView_SelectionChanged" >
+        <ListView HorizontalAlignment="center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=grid}"
+                  Height="{Binding ActualHeight, ElementName=grid}" Background="Black" Foreground="White" ItemsSource="{Binding FlightPlans}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="180"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="140"/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock Grid.Column="0" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Destination: "/>
-                        <TextBlock Grid.Column="0" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Destination}"/>
+                        <RelativePanel Grid.Column="0">
+                            <TextBlock Name="destinationText" Foreground="White" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="Destination: "/>
+                            <TextBlock Foreground="White" RelativePanel.RightOf="destinationText" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Destination}"/>
+                        </RelativePanel>
                         <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Terminal: "/>
                         <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding TerminalNumber}"/>
                     </Grid>

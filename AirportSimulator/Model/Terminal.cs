@@ -28,7 +28,6 @@ namespace AirportSimulator.Model
         {
             Destination = destination;
             TerminalNumber = terminalNumberIncrementer++;
-            FlightPlan = new FlightPlan(TerminalNumber);
             Task task = Task.Factory.StartNew(TakeLuggageToPlane);
         }
 

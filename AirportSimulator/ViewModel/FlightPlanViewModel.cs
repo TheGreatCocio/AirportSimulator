@@ -13,12 +13,7 @@ namespace AirportSimulator.ViewModel
     {
         private ObservableCollection<FlightPlan> flightPlans = new ObservableCollection<FlightPlan>();
 
-        public ObservableCollection<FlightPlan> FlightPlans { get => flightPlans; set => FlightPlans = value; }
-
-        private void GetFlightPlans()
-        {
-            
-        }
+        public ObservableCollection<FlightPlan> FlightPlans { get => flightPlans; set => FlightPlans = value; }        
 
         public FlightPlanViewModel()
         {
