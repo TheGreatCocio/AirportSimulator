@@ -1,0 +1,40 @@
+﻿<Page
+    x:Class="AirportSimulator.FlightPlanPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:AirportSimulator"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    xmlns:vm="using:AirportSimulator.ViewModel"
+    Height="600px" Width="400px">
+
+    <Page.DataContext>
+        <vm:FlightPlanViewModel/>
+    </Page.DataContext>
+
+    <Grid x:Name="grid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <ListView HorizontalAlignment="center" VerticalAlignment="Top" Width="{Binding ActualWidth, ElementName=grid}"
+                  Height="{Binding ActualHeight, ElementName=grid}" Background="Black" Foreground="White" ItemsSource="{Binding FlightPlans}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="180"/>
+                            <ColumnDefinition Width="30"/>
+                            <ColumnDefinition Width="140"/>
+                        </Grid.ColumnDefinitions>
+                        <RelativePanel Grid.Column="0">
+                            <TextBlock Name="destinationText" Foreground="White" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="Destination: "/>
+                            <TextBlock Foreground="White" RelativePanel.RightOf="destinationText" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Destination}"/>
+                        </RelativePanel>
+                        <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Terminal: "/>
+                        <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding TerminalNumber}"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+        </ListView>
+
+    </Grid>
+</Page>

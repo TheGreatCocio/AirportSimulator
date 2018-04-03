@@ -1,4 +1,5 @@
 ﻿using AirportSimulator.Model;
+using AirportSimulator.system;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,7 +12,7 @@ namespace AirportSimulator.system
     public class SortingMachine
     {
         private static SortingMachine instance;
-        private DAL dal = new DAL();
+        private DAL dal = DAL.Instance;
         public Queue<Luggage> Luggages = new Queue<Luggage>();
         List<Terminal> Terminals = new List<Terminal>();
 
