@@ -99,6 +99,7 @@
     <Compile Include="FlightPlanPage.xaml.cs">
       <DependentUpon>FlightPlanPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\OpenCloseConverter.cs" />
     <Compile Include="system\LostAndFound.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
