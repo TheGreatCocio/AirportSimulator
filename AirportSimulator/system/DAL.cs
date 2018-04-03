@@ -56,7 +56,6 @@ namespace AirportSimulator.system
 
         public string GetDestination(int identifier)
         {
-            CreateOfferedDestinations();
             if (Destinations.ContainsKey(identifier))
             {
                 return Destinations.Values.ElementAt(identifier);
@@ -72,6 +71,7 @@ namespace AirportSimulator.system
             List<Terminal> terminalList = new List<Terminal>();
             foreach (KeyValuePair<int, string> destination in Destinations)
             {
+                
                 terminalList.Add( new Terminal(destination.Key));
             }
             return terminalList;

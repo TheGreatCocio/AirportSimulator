@@ -12,6 +12,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using AirportSimulator.ViewModel;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -25,6 +26,11 @@ namespace AirportSimulator
         public MainPage()
         {
             this.InitializeComponent();
+        }
+        
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            TerminalViewModel terminalViewModel = (TerminalViewModel)this.DataContext;
         }
     }
 }
