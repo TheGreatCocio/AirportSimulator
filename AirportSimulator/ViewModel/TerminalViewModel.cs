@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace AirportSimulator.ViewModel
 {
+    
     public class TerminalViewModel : ViewModelBase
     {
         
