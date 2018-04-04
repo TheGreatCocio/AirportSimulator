@@ -17,7 +17,7 @@ namespace AirportSimulator.ViewModel
 
         public FlightPlanViewModel()
         {
-            foreach (FlightPlan plan in DAL.Instance.CreateFlightPlans())
+            foreach (FlightPlan plan in DAL.Instance.GetFlightPlans())
             {
                 flightPlans.Add(plan);
             }

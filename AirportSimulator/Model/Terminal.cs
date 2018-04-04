@@ -1,6 +1,7 @@
 ﻿using AirportSimulator.system;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,7 +12,7 @@ namespace AirportSimulator.Model
     {
         private static int terminalNumberIncrementer = 1;
         private int terminalNumber, destination;
-        private List<Luggage> luggageToBeBoarded;
+        private List<Luggage> luggageToBeBoarded = new List<Luggage>();
         private Queue<Luggage> terminalConveyor;
         private FlightPlan flightPlan;
         private DateTime departure;
@@ -25,14 +26,16 @@ namespace AirportSimulator.Model
         public Queue<Luggage> TerminalConveyor { get => terminalConveyor; set => terminalConveyor = value; }
         public FlightPlan FlightPlan { get => flightPlan; set => flightPlan = value; }
 
-        public Terminal(int destination)
+        public Terminal(int destination,FlightPlan flightPlan)
         {
             Destination = destination;
             TerminalNumber = terminalNumberIncrementer++;
             //Task task = Task.Factory.StartNew(TakeLuggageToPlane);
             IsOpen = true;
+            FlightPlan = flightPlan;
+            Debug.WriteLine(FlightPlan);
 
-            FlightPlan = new FlightPlan(this.terminalNumber, DAL.Instance.GetDestination(destination - 1));
+           
         }
 
         public async void TakeLuggageToPlane()

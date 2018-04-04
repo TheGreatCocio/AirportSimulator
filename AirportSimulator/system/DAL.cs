@@ -42,16 +42,29 @@ namespace AirportSimulator.system
             Destinations.Add(7, "NewYork");
             Destinations.Add(8, "Paris");
             Destinations.Add(9, "Turkey");
+            Destinations.Add(10, "Russia");
+
+        }
+        List<FlightPlan> flightPlanList = new List<FlightPlan>();
+
+        public List<FlightPlan> GetFlightPlans()
+        {
+            if (flightPlanList.Count != 0)
+            {
+                return flightPlanList;
+            }
+            else
+            {
+                return null;
+            }
         }
 
-        public List<FlightPlan> CreateFlightPlans()
-        {
-            List<FlightPlan> flightPlanList = new List<FlightPlan>();
+        public void CreateFlightPlans()
+        {            
             foreach (KeyValuePair<int, string> destination in Destinations)
             {
                 flightPlanList.Add(new FlightPlan(destination.Key, destination.Value));
             }
-            return flightPlanList;
         }
 
         public string GetDestination(int identifier)
@@ -68,11 +81,12 @@ namespace AirportSimulator.system
 
         public List<Terminal> CreateTerminals()
         {
+            CreateFlightPlans();
             List<Terminal> terminalList = new List<Terminal>();
-            foreach (KeyValuePair<int, string> destination in Destinations)
+            foreach (FlightPlan plan in flightPlanList)
             {
                 
-                terminalList.Add( new Terminal(destination.Key));
+                terminalList.Add( new Terminal(plan.TerminalNumber,plan));
             }
             return terminalList;
         }

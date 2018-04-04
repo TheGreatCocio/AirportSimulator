@@ -30,7 +30,7 @@ namespace AirportSimulator
         
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            TerminalViewModel terminalViewModel = (TerminalViewModel)this.DataContext;
+            
         }
     }
 }
