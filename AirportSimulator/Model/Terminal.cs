@@ -38,6 +38,8 @@ namespace AirportSimulator.Model
            
         }
 
+        
+
         public async void TakeLuggageToPlane()
         {
             while (true)
@@ -55,5 +57,13 @@ namespace AirportSimulator.Model
         {
             LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
         }
+
+        public void Close()
+        {
+            IsOpen = false;
+            StateChanged?.Invoke(this, new StateEventArgs(IsOpen));
+        }
+
+        public event EventHandler StateChanged;
     }
 }

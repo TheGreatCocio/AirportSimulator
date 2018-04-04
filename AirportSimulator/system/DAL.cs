@@ -27,9 +27,11 @@ namespace AirportSimulator.system
         private DAL()
         {
             CreateOfferedDestinations();
+            CreateFlightPlans();
         }
 
-        Dictionary<int, string> Destinations = new Dictionary<int, string>();
+        private Dictionary<int, string> Destinations = new Dictionary<int, string>();
+        private List<FlightPlan> flightPlanList = new List<FlightPlan>();
 
         private void CreateOfferedDestinations()
         {
@@ -44,8 +46,7 @@ namespace AirportSimulator.system
             Destinations.Add(9, "Turkey");
             Destinations.Add(10, "Russia");
 
-        }
-        List<FlightPlan> flightPlanList = new List<FlightPlan>();
+        }        
 
         public List<FlightPlan> GetFlightPlans()
         {
@@ -81,7 +82,6 @@ namespace AirportSimulator.system
 
         public List<Terminal> CreateTerminals()
         {
-            CreateFlightPlans();
             List<Terminal> terminalList = new List<Terminal>();
             foreach (FlightPlan plan in flightPlanList)
             {

@@ -28,9 +28,9 @@ namespace AirportSimulator
             this.InitializeComponent();
         }
         
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
-            
+            TerminalViewModel terminalViewModel = (TerminalViewModel)this.DataContext;
         }
     }
 }
