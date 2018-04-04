@@ -11,14 +11,30 @@ namespace AirportSimulator.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (value.Equals(true))
+            if (parameter.Equals("background"))
             {
-                return "Green";
+                if (value.Equals(true))
+                {
+                    return "Green";
+                }
+                else
+                {
+                    return "Red";
+                }
             }
-            else
+            else if (parameter.Equals("status"))
             {
-                return "Red";
+                if (value.Equals(true))
+                {
+                    return "Open";
+                }
+                else
+                {
+                    return "Closed";
+                }
             }
+            return null;
+            
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
