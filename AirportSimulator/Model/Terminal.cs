@@ -10,8 +10,7 @@ namespace AirportSimulator.Model
 {
     public class Terminal
     {
-        private static int terminalNumberIncrementer = 1;
-        private int terminalNumber, destination;
+        private int terminalNumber;
         private List<Luggage> luggageToBeBoarded = new List<Luggage>();
         private Queue<Luggage> terminalConveyor;
         private FlightPlan flightPlan;
@@ -19,23 +18,19 @@ namespace AirportSimulator.Model
         private bool isOpen;
 
         public int TerminalNumber { get => terminalNumber; set => terminalNumber = value; }
-        public int Destination { get => destination; set => destination = value; }
         public DateTime Departure { get => departure; set => departure = value; }
         public bool IsOpen { get => isOpen; set => isOpen = value; }
         public List<Luggage> LuggageToBeBoarded { get => luggageToBeBoarded; set => luggageToBeBoarded = value; }
         public Queue<Luggage> TerminalConveyor { get => terminalConveyor; set => terminalConveyor = value; }
         public FlightPlan FlightPlan { get => flightPlan; set => flightPlan = value; }
 
-        public Terminal(int destination,FlightPlan flightPlan)
+        public Terminal(int terminalNumber,FlightPlan flightPlan)
         {
-            Destination = destination;
-            TerminalNumber = terminalNumberIncrementer++;
+            TerminalNumber = terminalNumber;
             //Task task = Task.Factory.StartNew(TakeLuggageToPlane);
             IsOpen = true;
             FlightPlan = flightPlan;
-            Debug.WriteLine(FlightPlan);
-
-           
+            Debug.WriteLine(FlightPlan);           
         }
 
         
@@ -56,14 +51,6 @@ namespace AirportSimulator.Model
         public void DequeueLuggage()
         {
             LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
-        }
-
-        public void Close()
-        {
-            IsOpen = false;
-            StateChanged?.Invoke(this, new StateEventArgs(IsOpen));
-        }
-
-        public event EventHandler StateChanged;
+        }                
     }
 }

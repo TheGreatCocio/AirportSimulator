@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using System.Runtime.CompilerServices;
+using System.ComponentModel;
+using System.Collections.Specialized;
 
 namespace AirportSimulator.ViewModel
 {
@@ -15,6 +18,29 @@ namespace AirportSimulator.ViewModel
     public class TerminalViewModel : ViewModelBase
     {
         private bool _canExecuteMyCommand = true;
+
+        ObservableCollection<INotifyPropertyChanged> items = new ObservableCollection<INotifyPropertyChanged>();
+        
+
+        static void items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (e.OldItems != null)
+            {
+                foreach (INotifyPropertyChanged item in e.OldItems)
+                    item.PropertyChanged -= item_PropertyChanged;
+            }
+            if (e.NewItems != null)
+            {
+                foreach (INotifyPropertyChanged item in e.NewItems)
+                    item.PropertyChanged += item_PropertyChanged;
+            }
+        }
+
+        static void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
         private ObservableCollection<Terminal> terminals = new ObservableCollection<Terminal>();
         public ObservableCollection <Terminal> Terminals
         {
@@ -36,7 +62,7 @@ namespace AirportSimulator.ViewModel
             {
                 if (closeTerminal == null)
                 {
-                    closeTerminal = new RelayCommand<object>(Close);
+                    closeTerminal = new RelayCommand<object>(Close,  ()=> _canExecuteMyCommand);
                 }
 
                 return closeTerminal;
@@ -57,22 +83,10 @@ namespace AirportSimulator.ViewModel
             {
                 if (term.TerminalNumber.Equals(senderNumber))
                 {
-                    term.Close();
+                    term.IsOpen = false;
+                    items.CollectionChanged += items_CollectionChanged;
                 }
             }
-        }
-
-        private void StateChanged(object sender, EventArgs e)
-        {
-            StateEventArgs sea = (StateEventArgs)e;
-            foreach (Terminal term in Terminals)
-            {
-                if (term.Equals(sender))
-                {
-                    term.IsOpen = sea.State;
-                }
-            }
-        }
-
+        }        
     }
 }

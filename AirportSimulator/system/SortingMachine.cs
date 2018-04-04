@@ -39,7 +39,7 @@ namespace AirportSimulator.system
                 Luggage suitCase = Luggages.Dequeue();
                 foreach (Terminal terminal in Terminals)
                 {
-                    if (terminal.Destination.Equals(suitCase.Destination))
+                    if (terminal.TerminalNumber.Equals(suitCase.Destination))
                     {
                         terminal.TerminalConveyor.Enqueue(suitCase);
                     }
