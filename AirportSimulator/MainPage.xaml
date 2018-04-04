@@ -32,6 +32,9 @@
         <Grid.DataContext>
             <Terminal:TerminalViewModel/>
         </Grid.DataContext>
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Terminaler!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Text="Skranker!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
+        <TextBlock Grid.Row="0" Grid.Column="2" Text="Fly Planer!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
 
         <ListView Name="TerminalList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Terminals}">
             <ListView.ItemTemplate>
