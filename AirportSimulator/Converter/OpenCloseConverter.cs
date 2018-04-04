@@ -15,7 +15,7 @@ namespace AirportSimulator.Converter
             {
                 if (value.Equals(true))
                 {
-                    return "Green";
+                    return "LawnGreen";
                 }
                 else
                 {

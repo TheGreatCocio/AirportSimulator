@@ -19,34 +19,61 @@
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="MainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
         <Grid.DataContext>
             <Terminal:TerminalViewModel/>
         </Grid.DataContext>
 
-        <ListView  ItemsSource="{Binding Terminals}" Width="{Binding ActualWidth, ElementName=page}" >
+        <ListView Name="TerminalList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Terminals}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="FirstGrid" Background="{Binding IsOpen, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}">
-                        <Grid.ColumnDefinitions>
-                        </Grid.ColumnDefinitions>
+                    <Grid x:Name="FirstGrid" Padding="70,0,0,0" Background="{Binding IsOpen, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}" 
+                          Width="{Binding ActualWidth, ElementName=TerminalList}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0"/>
-                        <TextBlock Grid.Row="0" Text="{Binding IsOpen, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="50,20,0,0" />
-                        <Button Grid.Row="1" Content="Open" Margin="0,30,0,0" />
-                        <Button Grid.Row="1" Content="Close" Margin="100,30,0,0" Command="{Binding CloseTerminal}" CommandParameter="{Binding Terminals[0].TerminalNumber}">
+                        <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0" FontSize="20"/>
+                        <TextBlock Grid.Row="0" FontSize="20" Text="{Binding IsOpen, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,20,0,0" />
+                        <Button Grid.Row="1" Content="Open" Margin="0,20,0,10" Foreground="White">
+                        <Button.Background>
+                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                                <GradientStop Color="#FF9E9EA2"/>
+                                <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                                <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                            </LinearGradientBrush>
+                        </Button.Background>
+                        </Button>
+                        <Button Grid.Row="1" Content="Close" Margin="130,20,0,10" Command="{Binding CloseTerminal}" CommandParameter="{Binding Terminals[0].TerminalNumber}" Foreground="White">
                             <Button.DataContext>
                                 <ViewModel:TerminalViewModel/>
                             </Button.DataContext>
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                                    <GradientStop Color="#FF9E9EA2"/>
+                                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
                         </Button>
-                        <TextBlock Grid.Row="2" Text="Destination: " Margin="0,40,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Padding="0,0,0,20"/>
-                        <TextBlock Grid.Row="2" Text="{Binding FlightPlan.Destination}" Margin="100,40,0,0" />
-                        <TextBlock Grid.Row="2" Name="LuggageCount" Text="Luggage Count: " Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
-                        <TextBlock Grid.Row="2" Text="{Binding LuggageToBeBoarded.Count}" Margin="110,10,0,0"/>
+                        <TextBlock Grid.Row="2" FontSize="20" Text="Destination: " Margin="0,40,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Padding="0,0,0,20"/>
+                        <TextBlock Grid.Row="2" FontSize="20" Text="{Binding FlightPlan.Destination}" Margin="110,40,0,0" />
+                        <TextBlock Grid.Row="2" FontSize="20" Name="LuggageCount" Text="Luggage Count: " Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
+                        <TextBlock Grid.Row="2" FontSize="20" Text="{Binding LuggageToBeBoarded.Count}" Margin="145,10,0,0"/>
                     </Grid>
+                    
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
