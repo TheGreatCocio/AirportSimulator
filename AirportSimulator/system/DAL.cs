@@ -35,16 +35,16 @@ namespace AirportSimulator.system
 
         private void CreateOfferedDestinations()
         {
-            Destinations.Add(1, "Alanya");
-            Destinations.Add(2, "Bangkok");
-            Destinations.Add(3, "Barcelona");
-            Destinations.Add(4, "Beijing");
-            Destinations.Add(5, "Florida");
-            Destinations.Add(6, "Hawaii");
-            Destinations.Add(7, "NewYork");
-            Destinations.Add(8, "Paris");
-            Destinations.Add(9, "Turkey");
-            Destinations.Add(10, "Russia");
+            Destinations.Add(0, "Alanya");
+            Destinations.Add(1, "Bangkok");
+            Destinations.Add(2, "Barcelona");
+            Destinations.Add(3, "Beijing");
+            Destinations.Add(4, "Florida");
+            Destinations.Add(5, "Hawaii");
+            Destinations.Add(6, "NewYork");
+            Destinations.Add(7, "Paris");
+            Destinations.Add(8, "Turkey");
+            Destinations.Add(9, "Russia");
 
         }        
 

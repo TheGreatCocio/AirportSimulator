@@ -46,17 +46,8 @@
                         </Grid.RowDefinitions>
                         <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0" FontSize="20"/>
                         <TextBlock Grid.Row="0" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,20,0,0" />
-                        <Button Grid.Row="1" Content="Open" Margin="0,20,0,10" Foreground="White">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-                                <GradientStop Color="#FF3F3F46" Offset="0.793"/>
-                                <GradientStop Color="#FF9E9EA2"/>
-                                <GradientStop Color="#FF9E9EA2" Offset="1"/>
-                                <GradientStop Color="#FF3F3F46" Offset="0.287"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                        </Button>
-                        <Button Grid.Row="1" Content="Close" Margin="130,20,0,10" Command="{Binding DataContext.CloseTerminal, ElementName=MainGrid}" CommandParameter="{Binding TerminalNumber}" Foreground="White">
+                        
+                        <Button Grid.Row="1" Content="Open/Close" Width="200px" Margin="10,20,0,10" Command="{Binding DataContext.CloseTerminal, ElementName=MainGrid}" CommandParameter="{Binding TerminalNumber}" Foreground="White">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>

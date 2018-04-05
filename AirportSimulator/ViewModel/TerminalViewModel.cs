@@ -36,6 +36,7 @@ namespace AirportSimulator.ViewModel
             {
                 Terminals.Add(term);
             };
+            
         }
 
         public ICommand closeTerminal;
@@ -57,15 +58,39 @@ namespace AirportSimulator.ViewModel
 
 
 
+        //private void Close(object senderNumber)
+        //{
+        //    ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
+        //    foreach (Terminal term in temp)
+        //    {
+        //        if (term.TerminalNumber.Equals(senderNumber))
+        //        {
+
+        //            term.IsOpen = false;
+        //            break;
+
+        //        }
+
+        //    }
+
+        //    Terminals = temp;
+        //}
         private void Close(object senderNumber)
-        {           
+        {
             ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
             foreach (Terminal term in temp)
             {
                 if (term.TerminalNumber.Equals(senderNumber))
                 {
-
-                    term.IsOpen = false;
+                    if (!term.IsOpen)
+                    {
+                        term.IsOpen = true;
+                    }
+                    else
+                    {
+                        term.IsOpen = false;
+                    }
+                    
                     break;
 
                 }
