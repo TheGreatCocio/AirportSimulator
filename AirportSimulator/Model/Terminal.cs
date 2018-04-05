@@ -39,10 +39,12 @@ namespace AirportSimulator.Model
         public Terminal(int terminalNumber,FlightPlan flightPlan)
         {
             TerminalNumber = terminalNumber;
-            //Task task = Task.Factory.StartNew(TakeLuggageToPlane);
             IsOpen = true;
             FlightPlan = flightPlan;
-            Debug.WriteLine(FlightPlan);           
+            Debug.WriteLine(FlightPlan);
+            terminalConveyor = new Queue<Luggage>();
+            Task toPlane = Task.Factory.StartNew(TakeLuggageToPlane);
+            Task dequeue = Task.Factory.StartNew(DequeueLuggage);
         }
 
         
@@ -56,13 +58,21 @@ namespace AirportSimulator.Model
                     IsOpen = false;
                     await Task.Delay(10000);
                     LuggageToBeBoarded.Clear();
+                    IsOpen = true;
                 }
             }
         }        
 
-        public void DequeueLuggage()
+        public async void DequeueLuggage()
         {
-            LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
+            while (true)
+            {
+                if (terminalConveyor.Count != 0)
+                {
+                    LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
+                }
+                await Task.Delay(100);
+            }
         }                
     }
 }

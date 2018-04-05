@@ -34,20 +34,27 @@ namespace AirportSimulator.system
         private SortingMachine()
         {
             Debug.WriteLine("############## Count: " + Terminals.Count);
+            Task task = Task.Factory.StartNew(SendToTerminal);
+            
         }
-        public void SendToTerminal(int dest)
+        public async void SendToTerminal()
         {
-            if (Luggages.Count != 0)
+            while (true)
             {
-                Luggage suitCase = Luggages.Dequeue();
-                foreach (Terminal terminal in Terminals)
+                if (Luggages.Count != 0)
                 {
-                    if (terminal.TerminalNumber.Equals(suitCase.Destination))
+                    Luggage suitCase = Luggages.Dequeue();                    
+                    foreach (Terminal terminal in Terminals)
                     {
-                        terminal.TerminalConveyor.Enqueue(suitCase);
+                        if (terminal.TerminalNumber.Equals(suitCase.Destination))
+                        {
+                            terminal.TerminalConveyor.Enqueue(suitCase);
+                            break;
+                        }
                     }
                 }
-            }                                        
+                await Task.Delay(200);
+            }                                                    
         }
     }
 }

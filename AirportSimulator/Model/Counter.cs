@@ -28,8 +28,13 @@ namespace AirportSimulator.Model
         {
             while (true)
             {
-                SortingMachine.Instance.Luggages.Enqueue(lf.CreateLuggage());
-                await Task.Delay(1000);
+                while (SortingMachine.Instance.Luggages.Count < 30)
+                {
+
+                    SortingMachine.Instance.Luggages.Enqueue(lf.CreateLuggage());
+                    await Task.Delay(1000);
+                }
+                await Task.Delay(5000);
             }            
         }
     }

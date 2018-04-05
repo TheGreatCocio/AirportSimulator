@@ -17,7 +17,7 @@
         <OpenClose:OpenCloseConverter x:Key="OpenCloseConvert" />
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" x:Name="MainGrid">
+    <Grid Background="#343538" x:Name="MainGrid" >
         <Grid.RowDefinitions>
             <RowDefinition Height="100"/>
             <RowDefinition/>
@@ -28,25 +28,27 @@
             <ColumnDefinition/>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-      
-        <TextBlock Grid.Row="0" Grid.Column="0" Text="Terminaler!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
-        <TextBlock Grid.Row="0" Grid.Column="1" Text="Skranker!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
-        <TextBlock Grid.Row="0" Grid.Column="2" Text="Fly Planer!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
+        
+        <TextBlock Grid.Row="0" Grid.Column="0" Foreground="White" Text="Terminaler!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
+        <TextBlock Grid.Row="0" Grid.Column="1" Foreground="White" Text="Skranker!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
+        <TextBlock Grid.Row="0" Grid.Column="2" Foreground="White" Text="Fly Planer!" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Black" />
 
         <ListView Name="TerminalList" Grid.Row="1" Grid.Column="0" ItemsSource="{Binding Terminals, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="FirstGrid" Padding="70,0,0,0" Background="{Binding IsOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}" 
+                    <Grid x:Name="FirstGrid" BorderThickness="2" Padding="70,0,0,0" Background="{Binding IsOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}" 
                           Width="{Binding ActualWidth, ElementName=TerminalList}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
+                            <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0" FontSize="20"/>
-                        <TextBlock Grid.Row="0" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,20,0,0" />
-                        
-                        <Button Grid.Row="1" Content="Open/Close" Width="200px" Margin="10,20,0,10" Command="{Binding DataContext.CloseTerminal, ElementName=MainGrid}" CommandParameter="{Binding TerminalNumber}" Foreground="White">
+                        <TextBlock Grid.Row="0" Text="Terminal: "  Margin="0,10,0,0" FontSize="20"/>
+                        <TextBlock Grid.Row="0" FontSize="20" Text="{Binding TerminalNumber}"  Margin="85,10,0,0" />
+                        <TextBlock Grid.Row="1" Text="Status: "  Margin="0,10,0,0" FontSize="20"/>
+                        <TextBlock Grid.Row="1" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,10,0,0" />
+                        <Button Grid.Row="2" Content="Open/Close" Width="200px" Margin="0,10,0,0" Command="{Binding DataContext.CloseTerminal, ElementName=MainGrid}" CommandParameter="{Binding TerminalNumber}" Foreground="White">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
@@ -56,12 +58,11 @@
                                 </LinearGradientBrush>
                             </Button.Background>
                         </Button>
-                        <TextBlock Grid.Row="2" FontSize="20" Text="Destination: " Margin="0,40,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Padding="0,0,0,20"/>
-                        <TextBlock Grid.Row="2" FontSize="20" Text="{Binding FlightPlan.Destination}" Margin="110,40,0,0" />
-                        <TextBlock Grid.Row="2" FontSize="20" Name="LuggageCount" Text="Luggage Count: " Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
-                        <TextBlock Grid.Row="2" FontSize="20" Text="{Binding LuggageToBeBoarded.Count}" Margin="145,10,0,0"/>
+                        <TextBlock Grid.Row="3" FontSize="20" Text="Destination: " Margin="0,40,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto" Padding="0,0,0,20"/>
+                        <TextBlock Grid.Row="3" FontSize="20" Text="{Binding FlightPlan.Destination}" Margin="110,40,0,0" />
+                        <TextBlock Grid.Row="3" FontSize="20" Name="LuggageCount" Text="Luggage Count: " Margin="0,10,0,0" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto"/>
+                        <TextBlock Grid.Row="3" FontSize="20" Text="{Binding LuggageToBeBoarded.Count}" Margin="145,10,0,0"/>
                     </Grid>
-                    
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
@@ -72,17 +73,19 @@
             </ListView.DataContext>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid x:Name="SecondGrid" Padding="70,0,0,0" Background="{Binding IsOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}" 
+                    <Grid x:Name="SecondGrid" BorderThickness="2" Padding="70,0,0,0" Background="{Binding IsOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}" 
                           Width="{Binding ActualWidth, ElementName=CounterList}">
                         <Grid.RowDefinitions>
                             <RowDefinition/>
                             <RowDefinition/>
                             <RowDefinition/>
                         </Grid.RowDefinitions>
-                        <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0" FontSize="20"/>
-                        <TextBlock Grid.Row="0" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,20,0,0" />
+                        <TextBlock Grid.Row="0" Text="Skranke: "  Margin="0,20,0,0" FontSize="20"/>
+                        <TextBlock Grid.Row="0" FontSize="20" Text="{Binding CounterId}"  Margin="80,20,0,0" />
+                        <TextBlock Grid.Row="1" Text="Status: "  Margin="0,20,0,0" FontSize="20"/>
+                        <TextBlock Grid.Row="1" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,20,0,0" />
 
-                        <Button Grid.Row="1" Content="Open/Close" Width="200px" Margin="10,20,0,10" Command="{Binding DataContext.OpenCloseCounter, ElementName=CounterList}" CommandParameter="{Binding CounterId}" Foreground="White">
+                        <Button Grid.Row="2" Content="Open/Close" Width="200px" Margin="0,20,0,0" Command="{Binding DataContext.OpenCloseCounter, ElementName=CounterList}" CommandParameter="{Binding CounterId}" Foreground="White">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
@@ -93,15 +96,14 @@
                             </Button.Background>
                         </Button>
                     </Grid>
-
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
 
-        <ListView Name="FlightPlanList" Grid.Row="1" Grid.Column="2" Background="Black" Foreground="White" ItemsSource="{Binding Terminals[0].FlightPlan}" >
+        <ListView Name="FlightPlanList" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Terminals}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Width="{Binding ActualWidth, ElementName=FlightPlanList}" Background="AliceBlue">
+                    <Grid Padding="50,0,0,0" Width="{Binding ActualWidth, ElementName=FlightPlanList}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="30"/>
@@ -109,47 +111,13 @@
                         </Grid.ColumnDefinitions>
                         <RelativePanel Grid.Column="0">
                             <TextBlock Name="destinationText" Foreground="White" RelativePanel.AlignLeftWithPanel="True" TextWrapping="Wrap" Text="Destination: "/>
-                            <TextBlock Foreground="White" RelativePanel.RightOf="destinationText" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding Destination}"/>
+                            <TextBlock Foreground="White" RelativePanel.RightOf="destinationText" Margin="20,0,0,0" TextWrapping="Wrap" Text="{Binding FlightPlan.Destination}"/>
                         </RelativePanel>
                         <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Terminal: "/>
-                        <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding TerminalNumber}"/>
+                        <TextBlock Grid.Column="2" Foreground="White" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding FlightPlan.TerminalNumber}"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
-
         </ListView>
-        <!--<Grid x:Name="SecondGrid" Grid.Row="2" Background="{x:Bind Converter={StaticResource OpenCloseConvert}}">
-            <TextBlock Text="Status"/>
-            <Button Content="Open" />
-            <Button Content="Close" Margin="90,153,0,149" />
-            <TextBlock Text="Destination" Margin="14.18,244.209,1262.18,56.209" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform Rotation="-0.154"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Text="Luggage Count" Margin="384.18,248.209,892.18,52.709" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform Rotation="-0.154"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-        </Grid>
-        <Grid x:Name="ThirdtGrid" Grid.Row="3" Background="{x:Bind Converter={StaticResource OpenCloseConvert}}" FocusVisualPrimaryBrush="#FFF7F7F7">
-            <TextBlock Text="Status"/>
-            <Button Content="Open" />
-            <Button Content="Close" Margin="90,153,0,149" />
-            <TextBlock Text="Destination" Margin="14.18,244.209,1262.18,56.209" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform Rotation="-0.154"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-            <TextBlock Text="Luggage Count" Margin="384.18,248.209,892.18,52.709" RenderTransformOrigin="0.5,0.5" UseLayoutRounding="False" d:LayoutRounding="Auto">
-                <TextBlock.RenderTransform>
-                    <CompositeTransform Rotation="-0.154"/>
-                </TextBlock.RenderTransform>
-            </TextBlock>
-
-        </Grid>-->
-
-
     </Grid>
 </Page>

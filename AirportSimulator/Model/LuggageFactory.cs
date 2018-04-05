@@ -12,7 +12,7 @@ namespace AirportSimulator.Model
 
         public Luggage CreateLuggage()
         {
-            int num = rnd.Next(1, 9);
+            int num = rnd.Next(0, 10);
             return new Luggage(num);
         }
     }
