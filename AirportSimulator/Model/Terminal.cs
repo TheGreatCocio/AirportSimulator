@@ -49,7 +49,7 @@ namespace AirportSimulator.Model
 
         
 
-        public async void TakeLuggageToPlane()
+        private async void TakeLuggageToPlane()
         {
             while (true)
             {
@@ -63,7 +63,7 @@ namespace AirportSimulator.Model
             }
         }        
 
-        public async void DequeueLuggage()
+        private async void DequeueLuggage()
         {
             while (true)
             {
