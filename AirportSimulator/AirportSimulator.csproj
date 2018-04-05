@@ -113,6 +113,7 @@
     <Compile Include="system\SortingMachine.cs" />
     <Compile Include="system\DAL.cs" />
     <Compile Include="TrulyObservableCollection.cs" />
+    <Compile Include="ViewModel\CounterViewModel.cs" />
     <Compile Include="ViewModel\FlightPlanViewModel.cs" />
     <Compile Include="ViewModel\RelayCommand.cs" />
     <Compile Include="ViewModel\TerminalViewModel.cs" />
