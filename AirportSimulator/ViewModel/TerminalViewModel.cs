@@ -58,50 +58,7 @@ namespace AirportSimulator.ViewModel
 
 
         private void Close(object senderNumber)
-        {
-            /*
-
-            Debug.WriteLine("JUHU " + senderNumber);
-            Terminal curr = null;
-            foreach (Terminal term in Terminals)
-            {
-                if (term.TerminalNumber.Equals(senderNumber))
-                {   
-                   
-                    term.IsOpen = false;
-                    Debug.WriteLine("Terminal Closed!" + term.FlightPlan.Destination);
-                    OnPropertyChanged("Terminals");
-                  
-                    curr = term;
-
-                }
-
-            }
-
-
-            Terminals.Remove(curr);
-            */
-
-
-            //Working
-            /*     Terminal curr = null;
-                 int found = 0;
-                 for (int i = 0; i < Terminals.Count; i++)
-                 {
-                     if (Terminals[i].TerminalNumber.Equals(senderNumber))
-                     {
-                         curr = Terminals[i];
-                         curr.IsOpen = false;
-                         found = i;
-                         break;
-
-                     }
-
-
-                 }
-                 Terminals.RemoveAt(found);
-                 Terminals.Insert(found, curr);*/
-
+        {           
             ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
             foreach (Terminal term in temp)
             {
