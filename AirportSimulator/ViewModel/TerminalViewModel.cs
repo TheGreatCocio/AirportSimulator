@@ -19,7 +19,7 @@ namespace AirportSimulator.ViewModel
     public class TerminalViewModel : ViewModelBase
     {
         private bool _canExecuteMyCommand = true;
-        private ObservableCollection<Terminal> terminals = new ObservableCollection<Terminal>();
+        private ObservableCollection<Terminal> terminals = new ObservableCollection<Terminal>(DAL.Instance.CreateTerminals());
         public ObservableCollection<Terminal> Terminals
         {
             get { return terminals; }
@@ -32,11 +32,10 @@ namespace AirportSimulator.ViewModel
 
         public TerminalViewModel()
         {
-            foreach (Terminal term in DAL.Instance.CreateTerminals())
+            foreach (Terminal term in Terminals)
             {
-                Terminals.Add(term);
-            };
-            
+                SortingMachine.Instance.Terminals.Add(term);
+            }
         }
 
         public ICommand closeTerminal;
@@ -55,26 +54,7 @@ namespace AirportSimulator.ViewModel
                 return closeTerminal;
             }
         }
-
-
-
-        //private void Close(object senderNumber)
-        //{
-        //    ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
-        //    foreach (Terminal term in temp)
-        //    {
-        //        if (term.TerminalNumber.Equals(senderNumber))
-        //        {
-
-        //            term.IsOpen = false;
-        //            break;
-
-        //        }
-
-        //    }
-
-        //    Terminals = temp;
-        //}
+        
         private void Close(object senderNumber)
         {
             ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
@@ -82,21 +62,18 @@ namespace AirportSimulator.ViewModel
             {
                 if (term.TerminalNumber.Equals(senderNumber))
                 {
-                    if (!term.IsOpen)
-                    {
-                        term.IsOpen = true;
-                    }
-                    else
+                    if (term.IsOpen)
                     {
                         term.IsOpen = false;
                     }
+                    else
+                    {
+                        term.IsOpen = true;
+                    }
                     
                     break;
-
                 }
-
             }
-
             Terminals = temp;
         }
     }

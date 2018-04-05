@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:AirportSimulator"
     xmlns:ViewModel="using:AirportSimulator.ViewModel"
-    xmlns:Terminal="using:AirportSimulator.ViewModel"
     xmlns:OpenClose="using:AirportSimulator.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -63,6 +62,38 @@
                         <TextBlock Grid.Row="2" FontSize="20" Text="{Binding LuggageToBeBoarded.Count}" Margin="145,10,0,0"/>
                     </Grid>
                     
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <ListView  Name="CounterList" Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Counters, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+            <ListView.DataContext>
+                <ViewModel:CounterViewModel/>
+            </ListView.DataContext>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid x:Name="SecondGrid" Padding="70,0,0,0" Background="{Binding IsOpen, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, Converter={StaticResource OpenCloseConvert}, ConverterParameter=background}" 
+                          Width="{Binding ActualWidth, ElementName=CounterList}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Grid.Row="0" Text="Status: "  Margin="0,20,0,0" FontSize="20"/>
+                        <TextBlock Grid.Row="0" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,20,0,0" />
+
+                        <Button Grid.Row="1" Content="Open/Close" Width="200px" Margin="10,20,0,10" Command="{Binding DataContext.OpenCloseCounter, ElementName=CounterList}" CommandParameter="{Binding CounterId}" Foreground="White">
+                            <Button.Background>
+                                <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+                                    <GradientStop Color="#FF3F3F46" Offset="0.793"/>
+                                    <GradientStop Color="#FF9E9EA2"/>
+                                    <GradientStop Color="#FF9E9EA2" Offset="1"/>
+                                    <GradientStop Color="#FF3F3F46" Offset="0.287"/>
+                                </LinearGradientBrush>
+                            </Button.Background>
+                        </Button>
+                    </Grid>
+
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>

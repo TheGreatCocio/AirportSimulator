@@ -18,10 +18,10 @@ namespace AirportSimulator.Model
         public Luggage(int destination)
         {
             Destination = destination;
-            id = LuggageIdGenerator();
+            //id = LuggageIdGenerator();
         }
 
-        private int LuggageIdGenerator()
+        /*private int LuggageIdGenerator()
         {
             Random rnd = new Random();
             int id = rnd.Next(100000, 999999);
@@ -39,6 +39,6 @@ namespace AirportSimulator.Model
             } while (jackpot);
             usedIds.Add(id);
             return id;
-        }
+        }*/
     }
 }

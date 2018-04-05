@@ -20,6 +20,7 @@ namespace AirportSimulator.Model
         public Counter()
         {
             counterId = counterIncrementer++;
+            IsOpen = true;
             Task task = Task.Factory.StartNew(CreateLuggage);
         }
 

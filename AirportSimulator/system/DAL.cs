@@ -91,6 +91,17 @@ namespace AirportSimulator.system
             return terminalList;
         }
 
+        public List<Counter> CreateCounters()
+        {
+            List<Counter> counterList = new List<Counter>();
+            counterList.Add(new Counter());
+            counterList.Add(new Counter());
+            counterList.Add(new Counter());
+            counterList.Add(new Counter());
+
+            return counterList;
+        }
+
         public void Departure(Luggage lug)
         {
 

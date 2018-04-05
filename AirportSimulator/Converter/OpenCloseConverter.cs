@@ -12,7 +12,6 @@ namespace AirportSimulator.Converter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            Debug.WriteLine("AA");
             if (parameter.Equals("background"))
             {
                 if (value.Equals(true))

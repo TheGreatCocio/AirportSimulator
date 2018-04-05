@@ -12,9 +12,10 @@ namespace AirportSimulator.system
     public class SortingMachine
     {
         private static SortingMachine instance;
-        private DAL dal = DAL.Instance;
         public Queue<Luggage> Luggages = new Queue<Luggage>();
-        List<Terminal> Terminals = new List<Terminal>();
+        List<Terminal> terminals = new List<Terminal>();
+
+        public List<Terminal> Terminals { get => terminals; set => terminals = value; }
 
         public static SortingMachine Instance
         {
@@ -27,9 +28,11 @@ namespace AirportSimulator.system
                 return instance;
             }
         }
+
+        
+
         private SortingMachine()
         {
-            Terminals = dal.CreateTerminals();
             Debug.WriteLine("############## Count: " + Terminals.Count);
         }
         public void SendToTerminal(int dest)
