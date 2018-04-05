@@ -33,6 +33,7 @@ namespace AirportSimulator.system
         private Dictionary<int, string> Destinations = new Dictionary<int, string>();
         private List<FlightPlan> flightPlanList = new List<FlightPlan>();
 
+        // Creates all the destinations to a Dictionary
         private void CreateOfferedDestinations()
         {
             Destinations.Add(0, "Alanya");
@@ -45,21 +46,9 @@ namespace AirportSimulator.system
             Destinations.Add(7, "Paris");
             Destinations.Add(8, "Turkey");
             Destinations.Add(9, "Russia");
-
         }        
-
-        public List<FlightPlan> GetFlightPlans()
-        {
-            if (flightPlanList.Count != 0)
-            {
-                return flightPlanList;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
+        
+        // Creates a Flight Plan for every Destination
         public void CreateFlightPlans()
         {            
             foreach (KeyValuePair<int, string> destination in Destinations)
@@ -68,29 +57,18 @@ namespace AirportSimulator.system
             }
         }
 
-        public string GetDestination(int identifier)
-        {
-            if (Destinations.ContainsKey(identifier))
-            {
-                return Destinations.Values.ElementAt(identifier);
-            }
-            else
-            {
-                return "No destination found";
-            }
-        }
-
+        // Creates A Terminal for every Flight Plan
         public List<Terminal> CreateTerminals()
         {
             List<Terminal> terminalList = new List<Terminal>();
             foreach (FlightPlan plan in flightPlanList)
-            {
-                
+            {                
                 terminalList.Add( new Terminal(plan.TerminalNumber,plan));
             }
             return terminalList;
         }
 
+        // Creates 4 new Counters
         public List<Counter> CreateCounters()
         {
             List<Counter> counterList = new List<Counter>();
@@ -100,15 +78,6 @@ namespace AirportSimulator.system
             counterList.Add(new Counter());
 
             return counterList;
-        }
-
-        public void Departure(Luggage lug)
-        {
-
-        }
-        public void TestDAl()
-        {
-            Debug.WriteLine(GetDestination(8));
         }
     }
 }

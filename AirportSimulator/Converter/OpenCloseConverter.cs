@@ -10,8 +10,10 @@ namespace AirportSimulator.Converter
 {
     public class OpenCloseConverter:IValueConverter
     {
+        // A Converter to switch color and text based on Terminal/Counter Open/Close State
         public object Convert(object value, Type targetType, object parameter, string language)
         {
+            // If The parameter send with the caller is "background" it is the background color
             if (parameter.Equals("background"))
             {
                 if (value.Equals(true))
@@ -23,6 +25,7 @@ namespace AirportSimulator.Converter
                     return "Red";
                 }
             }
+            // If The parameter send with the caller is "status" it is the status textblock 
             else if (parameter.Equals("status"))
             {
                 if (value.Equals(true))

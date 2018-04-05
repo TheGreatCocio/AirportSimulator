@@ -19,18 +19,19 @@ namespace AirportSimulator.Model
 
         public Counter()
         {
-            counterId = counterIncrementer++;
+            CounterId = counterIncrementer++;
             IsOpen = true;
+            // Starts a new "Thread" there is running the async method "CreateLuggage"
             Task task = Task.Factory.StartNew(CreateLuggage);
         }
 
+        // Creates New Luggage and adds it to a the sorting machine queue while its below 30
         public async void CreateLuggage()
         {
             while (true)
             {
                 while (SortingMachine.Instance.Luggages.Count < 30)
                 {
-
                     SortingMachine.Instance.Luggages.Enqueue(lf.CreateLuggage());
                     await Task.Delay(1000);
                 }

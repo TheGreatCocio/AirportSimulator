@@ -6,7 +6,9 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+/// <summary>
+/// Sorting Machine Singleton 
+/// </summary>
 namespace AirportSimulator.system
 {
     public class SortingMachine
@@ -29,29 +31,32 @@ namespace AirportSimulator.system
             }
         }
 
-        
-
         private SortingMachine()
         {
-            Debug.WriteLine("############## Count: " + Terminals.Count);
+            // Starts a new "Thread" there is running the async method "SendToTerminal"
             Task task = Task.Factory.StartNew(SendToTerminal);
-            
         }
+
+        // Dequeues the Luggage that comes in the Luggages Queue from the counters and
+        // Sends them to the correct terminal based on the destination on the Luggage
         public async void SendToTerminal()
         {
             while (true)
             {
                 if (Luggages.Count != 0)
                 {
-                    Luggage suitCase = Luggages.Dequeue();                    
-                    foreach (Terminal terminal in Terminals)
+                    Luggage suitCase = Luggages.Dequeue();
+                    if (suitCase != null)
                     {
-                        if (terminal.TerminalNumber.Equals(suitCase.Destination))
+                        foreach (Terminal terminal in Terminals)
                         {
-                            terminal.TerminalConveyor.Enqueue(suitCase);
-                            break;
+                            if (terminal.TerminalNumber.Equals(suitCase.Destination) && terminal.IsOpen)
+                            {
+                                terminal.TerminalConveyor.Enqueue(suitCase);
+                                break;
+                            }
                         }
-                    }
+                    }                    
                 }
                 await Task.Delay(200);
             }                                                    

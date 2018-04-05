@@ -31,7 +31,7 @@ namespace AirportSimulator.ViewModel
 
         public ICommand openCloseCounter;
         /// <summary>
-        /// Returns a command with a parameter
+        /// Returns a command with a parameter witch is bound to a open/close Button
         /// </summary>
         public ICommand OpenCloseCounter
         {
@@ -39,17 +39,21 @@ namespace AirportSimulator.ViewModel
             {
                 if (openCloseCounter == null)
                 {
+                    // Command that executes the OpenClose Method with a parameter
                     openCloseCounter = new RelayCommand<object>(OpenClose, () => _canExecuteMyCommand);
                 }
                 return openCloseCounter;
             }
         }
-        
+
+        // A Method that opens a closed counter or closes a open counter
         private void OpenClose(object senderNumber)
         {
+            // A Temp Collection
             ObservableCollection<Counter> temp = new ObservableCollection<Counter>(Counters);
             foreach (Counter count in temp)
             {
+                // If the sending counter matches a counter in the collection then Open/Close and break
                 if (count.CounterId.Equals(senderNumber))
                 {
                     if (!count.IsOpen)
@@ -65,7 +69,7 @@ namespace AirportSimulator.ViewModel
 
                 }
             }
-
+            // The Bound Collection equals the temp collection
             Counters = temp;
         }
     }

@@ -18,7 +18,7 @@ namespace AirportSimulator.ViewModel
 
     public class TerminalViewModel : ViewModelBase
     {
-        private bool _canExecuteMyCommand = true;
+        private bool _canExecuteMyCommand = true;        
         private ObservableCollection<Terminal> terminals = new ObservableCollection<Terminal>(DAL.Instance.CreateTerminals());
         public ObservableCollection<Terminal> Terminals
         {
@@ -34,32 +34,36 @@ namespace AirportSimulator.ViewModel
         {
             foreach (Terminal term in Terminals)
             {
+                // Updates The Sorting Machines List Of Terminals
                 SortingMachine.Instance.Terminals.Add(term);
             }
         }
 
-        public ICommand closeTerminal;
+        public ICommand openCloseTerminal;
         /// <summary>
-        /// Returns a command with a parameter
-        /// </summary>
-        public ICommand CloseTerminal
+        /// Returns a command with a parameter witch is bound to a open/close Button
+        /// </summary>        
+        public ICommand OpenCloseTerminal
         {
             get
             {
-                if (closeTerminal == null)
+                if (openCloseTerminal == null)
                 {
-                    closeTerminal = new RelayCommand<object>(Close, () => _canExecuteMyCommand);
+                    // Command that executes the OpenClose Method with a parameter
+                    openCloseTerminal = new RelayCommand<object>(OpenClose, () => _canExecuteMyCommand);
                 }
-
-                return closeTerminal;
+                return openCloseTerminal;
             }
         }
         
-        private void Close(object senderNumber)
+        // A Method that opens a closed terminal or closes a open terminal
+        private void OpenClose(object senderNumber)
         {
+            // A Temp Collection
             ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
             foreach (Terminal term in temp)
             {
+                // If the sending terminal matches a terminal in the collection then Open/Close and break
                 if (term.TerminalNumber.Equals(senderNumber))
                 {
                     if (term.IsOpen)
@@ -74,6 +78,7 @@ namespace AirportSimulator.ViewModel
                     break;
                 }
             }
+            // The Bound Collection equals the temp collection
             Terminals = temp;
         }
     }

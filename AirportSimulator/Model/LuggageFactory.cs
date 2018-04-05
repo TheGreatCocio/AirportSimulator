@@ -10,6 +10,7 @@ namespace AirportSimulator.Model
     {
         Random rnd = new Random();
 
+        // Creates and returns a new Luggage object with a random destination Destination
         public Luggage CreateLuggage()
         {
             int num = rnd.Next(0, 10);

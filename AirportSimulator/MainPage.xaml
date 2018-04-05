@@ -48,7 +48,7 @@
                         <TextBlock Grid.Row="0" FontSize="20" Text="{Binding TerminalNumber}"  Margin="85,10,0,0" />
                         <TextBlock Grid.Row="1" Text="Status: "  Margin="0,10,0,0" FontSize="20"/>
                         <TextBlock Grid.Row="1" FontSize="20" Text="{Binding IsOpen, Mode=TwoWay, Converter={StaticResource OpenCloseConvert}, ConverterParameter=status}"  Margin="70,10,0,0" />
-                        <Button Grid.Row="2" Content="Open/Close" Width="200px" Margin="0,10,0,0" Command="{Binding DataContext.CloseTerminal, ElementName=MainGrid}" CommandParameter="{Binding TerminalNumber}" Foreground="White">
+                        <Button Grid.Row="2" Content="Open/Close" Width="200px" Margin="0,10,0,0" Command="{Binding DataContext.OpenCloseTerminal, ElementName=MainGrid}" CommandParameter="{Binding TerminalNumber}" Foreground="White">
                             <Button.Background>
                                 <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
                                     <GradientStop Color="#FF3F3F46" Offset="0.793"/>
