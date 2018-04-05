@@ -15,45 +15,27 @@ using System.Diagnostics;
 
 namespace AirportSimulator.ViewModel
 {
-    
+
     public class TerminalViewModel : ViewModelBase
     {
         private bool _canExecuteMyCommand = true;
-
-        //ObservableCollection<INotifyPropertyChanged> items = new ObservableCollection<INotifyPropertyChanged>();
-        //items.CollectionChanged += items_CollectionChanged;       
-
-        //static void items_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
-        //{
-        //    if (e.OldItems != null)
-        //    {
-        //        foreach (INotifyPropertyChanged item in e.OldItems)
-        //            item.PropertyChanged -= item_PropertyChanged;
-        //    }
-        //    if (e.NewItems != null)
-        //    {
-        //        foreach (INotifyPropertyChanged item in e.NewItems)
-        //            item.PropertyChanged += item_PropertyChanged;
-        //    }
-        //}
-
-        //static void item_PropertyChanged(object sender, PropertyChangedEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         private ObservableCollection<Terminal> terminals = new ObservableCollection<Terminal>();
-        public ObservableCollection <Terminal> Terminals
+        public ObservableCollection<Terminal> Terminals
         {
             get { return terminals; }
             set
             {
-                foreach (Terminal terminal in terminals)
-                {
-                    OnPropertyChanged();                
-                }
                 terminals = value;
+                OnPropertyChanged();
             }
+        }
+
+        public TerminalViewModel()
+        {
+            foreach (Terminal term in DAL.Instance.CreateTerminals())
+            {
+                Terminals.Add(term);
+            };
         }
 
         public ICommand closeTerminal;
@@ -66,31 +48,74 @@ namespace AirportSimulator.ViewModel
             {
                 if (closeTerminal == null)
                 {
-                    closeTerminal = new RelayCommand<object>(Close,  ()=> _canExecuteMyCommand);
+                    closeTerminal = new RelayCommand<object>(Close, () => _canExecuteMyCommand);
                 }
 
                 return closeTerminal;
             }
-        }       
-
-        public TerminalViewModel()
-        {
-            foreach (Terminal term in DAL.Instance.CreateTerminals())
-            {
-                terminals.Add(term);
-            };
         }
+
+
 
         private void Close(object senderNumber)
         {
+            /*
+
+            Debug.WriteLine("JUHU " + senderNumber);
+            Terminal curr = null;
             foreach (Terminal term in Terminals)
             {
                 if (term.TerminalNumber.Equals(senderNumber))
-                {
+                {   
+                   
                     term.IsOpen = false;
-                    Debug.WriteLine("Terminal Closed!");
+                    Debug.WriteLine("Terminal Closed!" + term.FlightPlan.Destination);
+                    OnPropertyChanged("Terminals");
+                  
+                    curr = term;
+
                 }
+
             }
-        }        
+
+
+            Terminals.Remove(curr);
+            */
+
+
+            //Working
+            /*     Terminal curr = null;
+                 int found = 0;
+                 for (int i = 0; i < Terminals.Count; i++)
+                 {
+                     if (Terminals[i].TerminalNumber.Equals(senderNumber))
+                     {
+                         curr = Terminals[i];
+                         curr.IsOpen = false;
+                         found = i;
+                         break;
+
+                     }
+
+
+                 }
+                 Terminals.RemoveAt(found);
+                 Terminals.Insert(found, curr);*/
+
+            ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
+            foreach (Terminal term in temp)
+            {
+                if (term.TerminalNumber.Equals(senderNumber))
+                {
+
+                    term.IsOpen = false;
+                    break;
+
+                }
+
+            }
+
+            Terminals = temp;
+        }
     }
 }

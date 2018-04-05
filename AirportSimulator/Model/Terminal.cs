@@ -1,6 +1,7 @@
 ﻿using AirportSimulator.system;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace AirportSimulator.Model
 {
-    public class Terminal
+    public class Terminal : INotifyPropertyChanged
     {
         private int terminalNumber;
         private List<Luggage> luggageToBeBoarded = new List<Luggage>();
@@ -17,9 +18,20 @@ namespace AirportSimulator.Model
         private DateTime departure;
         private bool isOpen;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public int TerminalNumber { get => terminalNumber; set => terminalNumber = value; }
         public DateTime Departure { get => departure; set => departure = value; }
-        public bool IsOpen { get => isOpen; set => isOpen = value; }
+        public bool IsOpen
+        {
+            get { return isOpen; }
+            set
+            {
+                isOpen = value;
+               
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("isOpen"));
+            }
+        }
         public List<Luggage> LuggageToBeBoarded { get => luggageToBeBoarded; set => luggageToBeBoarded = value; }
         public Queue<Luggage> TerminalConveyor { get => terminalConveyor; set => terminalConveyor = value; }
         public FlightPlan FlightPlan { get => flightPlan; set => flightPlan = value; }
