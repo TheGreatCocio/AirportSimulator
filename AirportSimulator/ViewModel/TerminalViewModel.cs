@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Collections.Specialized;
+using System.Diagnostics;
 
 namespace AirportSimulator.ViewModel
 {
@@ -87,6 +88,7 @@ namespace AirportSimulator.ViewModel
                 if (term.TerminalNumber.Equals(senderNumber))
                 {
                     term.IsOpen = false;
+                    Debug.WriteLine("Terminal Closed!");
                 }
             }
         }        
