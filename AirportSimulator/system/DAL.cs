@@ -72,11 +72,10 @@ namespace AirportSimulator.system
         public List<Counter> CreateCounters()
         {
             List<Counter> counterList = new List<Counter>();
-            counterList.Add(new Counter());
-            counterList.Add(new Counter());
-            counterList.Add(new Counter());
-            counterList.Add(new Counter());
-
+            for (int i = 0; i < 4; i++)
+            {
+                counterList.Add(new Counter());
+            }
             return counterList;
         }
     }

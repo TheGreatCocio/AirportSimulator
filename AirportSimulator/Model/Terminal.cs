@@ -37,7 +37,6 @@ namespace AirportSimulator.Model
             TerminalNumber = terminalNumber;
             IsOpen = true;
             FlightPlan = flightPlan;
-            Debug.WriteLine(FlightPlan);
             TerminalConveyor = new Queue<Luggage>();
             // Starts a new "Thread" there is running the async method "Terminaling"
             Task dequeue = Task.Factory.StartNew(Terminaling);
@@ -54,8 +53,6 @@ namespace AirportSimulator.Model
                     if (TerminalConveyor.Count != 0 && LuggageToBeBoarded.Count < 40)
                     {
                         LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
-                        Debug.WriteLine("DEQUEUEING!!!");
-                        Debug.WriteLine(TerminalNumber + " :: " + LuggageToBeBoarded.Count);
                         TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
                     }
                     else if (LuggageToBeBoarded.Count >= 40)

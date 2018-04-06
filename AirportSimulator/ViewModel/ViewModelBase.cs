@@ -14,7 +14,7 @@ namespace AirportSimulator.ViewModel
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private static CoreDispatcher dispatcher = Window.Current.Dispatcher;
+        public static CoreDispatcher dispatcher = Window.Current.Dispatcher;
 
         protected async virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {

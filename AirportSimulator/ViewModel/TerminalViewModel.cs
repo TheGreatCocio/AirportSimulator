@@ -12,12 +12,14 @@ using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Collections.Specialized;
 using System.Diagnostics;
+using Windows.UI.Core;
 
 namespace AirportSimulator.ViewModel
 {
 
     public class TerminalViewModel : ViewModelBase
     {
+        CoreDispatcher coreDispatcher = ViewModelBase.dispatcher;
         private bool _canExecuteMyCommand = true;        
         private ObservableCollection<Terminal> terminals = new ObservableCollection<Terminal>(DAL.Instance.CreateTerminals());
         public ObservableCollection<Terminal> Terminals
@@ -38,7 +40,7 @@ namespace AirportSimulator.ViewModel
                 SortingMachine.Instance.Terminals.Add(term);
                 // Set up listener to each Terminal
                 term.TerminalChanged += TerminalChanged;
-            }
+            }   
         }
 
         public ICommand openCloseTerminal;
@@ -74,16 +76,17 @@ namespace AirportSimulator.ViewModel
                     else
                     {
                         term.IsOpen = true;
-                    }
+                    }                    
                     break;
                 }
-            }
+            }            
+
             // The Bound Collection equals the temp collection
             Terminals = temp;
         }
 
         // When a Change is happening in the terminal then run this.
-        private void TerminalChanged(object sender, EventArgs e)
+        private async void TerminalChanged(object sender, EventArgs e)
         {
             // A Temp Collection
             ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
@@ -91,17 +94,12 @@ namespace AirportSimulator.ViewModel
             TerminalEventArgs tea = (TerminalEventArgs)e;
             if (tea != null)
             {
-                // Set the temp terminal LuggageToBeBoarded to the senders LuggageToBeBoarded 
-                foreach (Terminal term in temp)
+                // Set the temp terminal LuggageToBeBoarded to the senders LuggageToBeBoarded                 
+                if (temp.Contains(tea.Terminal))
                 {
-                    if (term.TerminalNumber.Equals(tea.Terminal.TerminalNumber))
-                    {
-                        term.LuggageToBeBoarded = tea.Terminal.LuggageToBeBoarded;
-                    }
-                }
-                
-                // The Bound Collection equals the temp collection
-                Terminals = temp;                
+                    // Makes sure its the Core Dispatcher that updates the UI (For Later Use)   
+                    await coreDispatcher.RunAsync(CoreDispatcherPriority.Normal, () => Terminals[tea.Terminal.TerminalNumber - 1] = temp[tea.Terminal.TerminalNumber - 1]);                    
+                }             
             }            
         }
     }

@@ -53,7 +53,7 @@ namespace AirportSimulator.system
                             if (terminal.TerminalNumber.Equals(suitCase.Destination) && terminal.IsOpen)
                             {
                                 terminal.TerminalConveyor.Enqueue(suitCase);
-                                break;
+                                
                             }
                         }
                     }

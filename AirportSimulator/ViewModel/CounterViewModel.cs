@@ -26,7 +26,6 @@ namespace AirportSimulator.ViewModel
 
         public CounterViewModel()
         {
-
         }
 
         public ICommand openCloseCounter;
