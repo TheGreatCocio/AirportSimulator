@@ -9,16 +9,14 @@ using System.Threading.Tasks;
 
 namespace AirportSimulator.Model
 {
-    public class Terminal : INotifyPropertyChanged
+    public class Terminal
     {
         private int terminalNumber;
         private List<Luggage> luggageToBeBoarded = new List<Luggage>();
         private Queue<Luggage> terminalConveyor;
         private FlightPlan flightPlan;
         private DateTime departure;
-        private bool isOpen;
-
-        public event PropertyChangedEventHandler PropertyChanged;
+        private bool isOpen;        
 
         public int TerminalNumber { get => terminalNumber; set => terminalNumber = value; }
         public DateTime Departure { get => departure; set => departure = value; }
@@ -55,18 +53,23 @@ namespace AirportSimulator.Model
                 {                    
                     LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
                     Debug.WriteLine("DEQUEUEING!!!");
-                    Debug.WriteLine(LuggageToBeBoarded.Count);
+                    Debug.WriteLine(TerminalNumber + " :: " + LuggageToBeBoarded.Count);
+                    TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
                 }
                 else if (LuggageToBeBoarded.Count >= 40)
                 {
                     IsOpen = false;
+                    TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
                     await Task.Delay(10000);
                     LuggageToBeBoarded.Clear();
                     IsOpen = true;
+                    TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
                 }
-
+                
                 await Task.Delay(1000);
             }
-        }                
+        }
+
+        public event EventHandler TerminalChanged;
     }
 }

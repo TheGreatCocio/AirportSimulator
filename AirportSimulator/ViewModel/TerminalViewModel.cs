@@ -74,12 +74,33 @@ namespace AirportSimulator.ViewModel
                     {
                         term.IsOpen = true;
                     }
-                    
                     break;
                 }
             }
             // The Bound Collection equals the temp collection
             Terminals = temp;
+        }
+
+        private void TerminalChanged(object sender, EventArgs e)
+        {
+            // A Temp Collection
+            ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
+
+            TerminalEventArgs tea = (TerminalEventArgs)e;
+            if (tea != null)
+            {
+                for (int i = 0; i < temp.Count; i++)
+                {
+                    if (i.Equals(tea.Terminal.TerminalNumber))
+                    {
+                        temp.RemoveAt(i);
+                        temp.Insert(i, tea.Terminal);
+                        break;
+                    }
+                }
+                // The Bound Collection equals the temp collection
+                Terminals = temp;
+            }            
         }
     }
 }
