@@ -30,7 +30,7 @@ namespace AirportSimulator.Model
         {
             while (true)
             {
-                while (SortingMachine.Instance.Luggages.Count < 30)
+                while (SortingMachine.Instance.Luggages.Count < 30 && IsOpen)
                 {
                     SortingMachine.Instance.Luggages.Enqueue(lf.CreateLuggage());
                     await Task.Delay(1000);

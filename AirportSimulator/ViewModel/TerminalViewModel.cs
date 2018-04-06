@@ -36,6 +36,8 @@ namespace AirportSimulator.ViewModel
             {
                 // Updates The Sorting Machines List Of Terminals
                 SortingMachine.Instance.Terminals.Add(term);
+                // Set up listener to each Terminal
+                term.TerminalChanged += TerminalChanged;
             }
         }
 
@@ -74,12 +76,34 @@ namespace AirportSimulator.ViewModel
                     {
                         term.IsOpen = true;
                     }
-                    
                     break;
                 }
             }
             // The Bound Collection equals the temp collection
             Terminals = temp;
+        }
+
+        // When a Change is happening in the terminal then run this.
+        private void TerminalChanged(object sender, EventArgs e)
+        {
+            // A Temp Collection
+            ObservableCollection<Terminal> temp = new ObservableCollection<Terminal>(Terminals);
+
+            TerminalEventArgs tea = (TerminalEventArgs)e;
+            if (tea != null)
+            {
+                // Set the temp terminal LuggageToBeBoarded to the senders LuggageToBeBoarded 
+                foreach (Terminal term in temp)
+                {
+                    if (term.TerminalNumber.Equals(tea.Terminal.TerminalNumber))
+                    {
+                        term.LuggageToBeBoarded = tea.Terminal.LuggageToBeBoarded;
+                    }
+                }
+
+                // The Bound Collection equals the temp collection
+                Terminals = temp;
+            }            
         }
     }
 }
