@@ -99,9 +99,9 @@ namespace AirportSimulator.ViewModel
                         term.LuggageToBeBoarded = tea.Terminal.LuggageToBeBoarded;
                     }
                 }
-
+                
                 // The Bound Collection equals the temp collection
-                Terminals = temp;
+                Terminals = temp;                
             }            
         }
     }
