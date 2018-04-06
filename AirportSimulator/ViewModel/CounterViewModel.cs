@@ -30,9 +30,9 @@ namespace AirportSimulator.ViewModel
         }
 
         public ICommand openCloseCounter;
-        /// <summary>
-        /// Returns a command with a parameter witch is bound to a open/close Button
-        /// </summary>
+        public ICommand openCloseAllCounter;
+
+        // Returns a command with a parameter witch is bound to a open/close Button
         public ICommand OpenCloseCounter
         {
             get
@@ -43,6 +43,20 @@ namespace AirportSimulator.ViewModel
                     openCloseCounter = new RelayCommand<object>(OpenClose, () => _canExecuteMyCommand);
                 }
                 return openCloseCounter;
+            }
+        }
+
+        // Returns a command with a parameter witch is bound to the open/close All Button
+        public ICommand OpenCloseAllCounter
+        {
+            get
+            {
+                if (openCloseAllCounter == null)
+                {
+                    // Command that executes the OpenClose Method with a parameter
+                    openCloseAllCounter = new RelayCommand<object>(OpenCloseAll, () => _canExecuteMyCommand);
+                }
+                return openCloseAllCounter;
             }
         }
 
@@ -70,6 +84,26 @@ namespace AirportSimulator.ViewModel
                 }
             }
             // The Bound Collection equals the temp collection
+            Counters = temp;
+        }
+
+        // Opens or Closes all the counters
+        private void OpenCloseAll(object sender)
+        {
+            // A Temp Collection
+            ObservableCollection<Counter> temp = new ObservableCollection<Counter>(Counters);
+
+            foreach (Counter count in temp)
+            {
+                if (!count.IsOpen)
+                {
+                    count.IsOpen = true;
+                }
+                else
+                {
+                    count.IsOpen = false;
+                }
+            }
             Counters = temp;
         }
     }

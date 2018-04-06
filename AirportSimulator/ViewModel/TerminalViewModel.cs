@@ -42,9 +42,8 @@ namespace AirportSimulator.ViewModel
         }
 
         public ICommand openCloseTerminal;
-        /// <summary>
-        /// Returns a command with a parameter witch is bound to a open/close Button
-        /// </summary>        
+
+        // Returns a command with a parameter witch is bound to a open/close Button
         public ICommand OpenCloseTerminal
         {
             get

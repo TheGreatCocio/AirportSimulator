@@ -49,26 +49,28 @@ namespace AirportSimulator.Model
         {
             while (true)
             {
-                if (TerminalConveyor.Count != 0 && LuggageToBeBoarded.Count < 40)
-                {                    
-                    LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
-                    Debug.WriteLine("DEQUEUEING!!!");
-                    Debug.WriteLine(TerminalNumber + " :: " + LuggageToBeBoarded.Count);
-                    TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
-                }
-                else if (LuggageToBeBoarded.Count >= 40)
+                if (IsOpen)
                 {
-                    IsOpen = false;
-                    TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
-                    await Task.Delay(10000);
-                    LuggageToBeBoarded.Clear();
-                    IsOpen = true;
-                    TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
+                    if (TerminalConveyor.Count != 0 && LuggageToBeBoarded.Count < 40)
+                    {
+                        LuggageToBeBoarded.Add(TerminalConveyor.Dequeue());
+                        Debug.WriteLine("DEQUEUEING!!!");
+                        Debug.WriteLine(TerminalNumber + " :: " + LuggageToBeBoarded.Count);
+                        TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
+                    }
+                    else if (LuggageToBeBoarded.Count >= 40)
+                    {
+                        IsOpen = false;
+                        TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
+                        await Task.Delay(10000);
+                        LuggageToBeBoarded.Clear();
+                        IsOpen = true;
+                        TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
+                    }
                 }
                 await Task.Delay(1000);
             }
         }
-
         public event EventHandler TerminalChanged;
     }
 }

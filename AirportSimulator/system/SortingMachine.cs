@@ -56,7 +56,7 @@ namespace AirportSimulator.system
                                 break;
                             }
                         }
-                    }                    
+                    }
                 }
                 await Task.Delay(200);
             }                                                    
