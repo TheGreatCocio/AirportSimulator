@@ -65,7 +65,6 @@ namespace AirportSimulator.Model
                     IsOpen = true;
                     TerminalChanged?.Invoke(this, new TerminalEventArgs(this));
                 }
-                
                 await Task.Delay(1000);
             }
         }

@@ -103,7 +103,7 @@
         <ListView Name="FlightPlanList" Grid.Row="1" Grid.Column="2" ItemsSource="{Binding Terminals}" >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Padding="50,0,0,0" Width="{Binding ActualWidth, ElementName=FlightPlanList}">
+                    <Grid Padding="30,0,0,0" Width="{Binding ActualWidth, ElementName=FlightPlanList}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="180"/>
                             <ColumnDefinition Width="30"/>

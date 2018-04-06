@@ -36,6 +36,8 @@ namespace AirportSimulator.ViewModel
             {
                 // Updates The Sorting Machines List Of Terminals
                 SortingMachine.Instance.Terminals.Add(term);
+                // Set up listener to each Terminal
+                term.TerminalChanged += TerminalChanged;
             }
         }
 
@@ -81,6 +83,7 @@ namespace AirportSimulator.ViewModel
             Terminals = temp;
         }
 
+        // When a Change is happening in the terminal then run this.
         private void TerminalChanged(object sender, EventArgs e)
         {
             // A Temp Collection
@@ -89,15 +92,15 @@ namespace AirportSimulator.ViewModel
             TerminalEventArgs tea = (TerminalEventArgs)e;
             if (tea != null)
             {
-                for (int i = 0; i < temp.Count; i++)
+                // Set the temp terminal LuggageToBeBoarded to the senders LuggageToBeBoarded 
+                foreach (Terminal term in temp)
                 {
-                    if (i.Equals(tea.Terminal.TerminalNumber))
+                    if (term.TerminalNumber.Equals(tea.Terminal.TerminalNumber))
                     {
-                        temp.RemoveAt(i);
-                        temp.Insert(i, tea.Terminal);
-                        break;
+                        term.LuggageToBeBoarded = tea.Terminal.LuggageToBeBoarded;
                     }
                 }
+
                 // The Bound Collection equals the temp collection
                 Terminals = temp;
             }            
