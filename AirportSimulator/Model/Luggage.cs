@@ -18,8 +18,11 @@ namespace AirportSimulator.Model
         public Luggage(int destination)
         {
             Destination = destination;
-            //id = LuggageIdGenerator();
+            //id = LuggageIdGenerator(); 
         }
+
+        #region LuggageIdGenerator: Code fails we will address at a later time
+
 
         /*private int LuggageIdGenerator()
         {
@@ -40,5 +43,6 @@ namespace AirportSimulator.Model
             usedIds.Add(id);
             return id;
         }*/
+        #endregion
     }
 }
